@@ -7,9 +7,53 @@ class DynamicArray
     int m_size;
     
     public:
-    DynamicArray(const DynamicArray&) = delete;
+    // Copy Constructor
+    // DynamicArray f(g);
+    // DynamicArray f = g;
+    DynamicArray(const DynamicArray& other)
+    {
+        int size = other.m_size;
+        int* buffer = new int[size];
+        m_buffer = buffer;
+        m_size = size;
+
+        for (int i; i<size; i++)
+        {
+            m_buffer[i] = other[i];
+        }
+    }
+
+    // Copy assignment operator
     DynamicArray& operator=(const DynamicArray&) = delete;
 
+    // Move Constructor
+    DynamicArray(DynamicArray&& other) noexcept
+    {
+        m_size = other.m_size;
+        m_buffer = other.m_buffer;
+
+        other.m_size = 0;
+        other.m_buffer = nullptr;
+    }
+
+    // Move assignment operator
+    DynamicArray& operator=(DynamicArray&& other) noexcept
+    {
+        if (this == &other)
+            return *this;
+        
+        delete[] m_buffer;
+
+        m_size = other.m_size;
+        m_buffer = other.m_buffer;
+
+        other.m_size = 0;
+        other.m_buffer = nullptr;
+
+        return *this;
+    }
+
+    // Constructor
     DynamicArray(int size)
     {
         int* buffer = new int[size];
@@ -17,6 +61,7 @@ class DynamicArray
         m_size = size;
     }
     
+    // Destructor
     ~DynamicArray()
     {
         delete[] m_buffer;
