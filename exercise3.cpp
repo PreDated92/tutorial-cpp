@@ -2,6 +2,8 @@
 #include <memory>
 #include <utility>
 
+// Dynamic array with max capacity.
+// Trade off vs DynamicArray is balancing speed (time) against memory (space).
 template <typename T>
 class Vector {
 private:
