@@ -99,6 +99,7 @@ class DynamicArray
     ~DynamicArray()
     {
         delete[] m_buffer;
+        m_buffer = nullptr;
     }
     
     // Const subscript operator overload
