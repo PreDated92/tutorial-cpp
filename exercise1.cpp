@@ -50,6 +50,8 @@ class DynamicArray
         return *this;
     }
 
+    // noexcept is required for standard containers like std::vector to use fast move operations
+
     // Move Constructor
     // DynamicArray g;
     // DynamicArray f = std::move(g);
