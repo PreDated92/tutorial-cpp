@@ -1,5 +1,6 @@
 #include <iostream>
 
+// Rule of 5 exercise, RAII
 class DynamicArray
 {
     private:
@@ -17,16 +18,42 @@ class DynamicArray
         m_buffer = buffer;
         m_size = size;
 
-        for (int i; i<size; i++)
+        for (int i=0; i<size; i++)
         {
-            m_buffer[i] = other[i];
+            m_buffer[i] = other.m_buffer[i];
         }
     }
 
     // Copy assignment operator
-    DynamicArray& operator=(const DynamicArray&) = delete;
+    // DynamicArray f, g;
+    // f(g);
+    // f = g;
+    DynamicArray& operator=(const DynamicArray& other)
+    {
+        // prevent data deletion of self copy
+        if (this == &other)
+            return *this;
+
+        // delete to avoid memory leak
+        delete[] m_buffer;
+
+        int size = other.m_size;
+        int* buffer = new int[size];
+        m_buffer = buffer;
+        m_size = size;
+
+        for (int i=0; i < size; i++)
+        {
+            m_buffer[i] = other.m_buffer[i];
+        }
+
+        return *this;
+    }
 
     // Move Constructor
+    // DynamicArray g;
+    // DynamicArray f = std::move(g);
+    // DynamicArray h = DynamicArray(1);
     DynamicArray(DynamicArray&& other) noexcept
     {
         m_size = other.m_size;
@@ -37,11 +64,16 @@ class DynamicArray
     }
 
     // Move assignment operator
+    // DynamicArray f, g, h;
+    // f = std::move(g);
+    // h = DynamicArray(1);
     DynamicArray& operator=(DynamicArray&& other) noexcept
     {
+        // prevent data deletion of self copy
         if (this == &other)
             return *this;
         
+        // delete to avoid memory leak
         delete[] m_buffer;
 
         m_size = other.m_size;
@@ -67,6 +99,13 @@ class DynamicArray
         delete[] m_buffer;
     }
     
+    // Const subscript operator overload
+    int operator[](int index) const
+    {
+        return m_buffer[index];
+    }
+
+    // Subscript operator overload
     int& operator[](int index)
     {
         return m_buffer[index];
