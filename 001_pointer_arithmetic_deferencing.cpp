@@ -19,6 +19,15 @@ int sumArray(int* arr, int size)
     return total;
 }
 
+// Changing Value via Pointer and Double Pointer
+void incrementArray(int* arr)
+{
+    *arr += 1;
+    arr++;
+    int** ptr = &arr;
+    **ptr += 2;
+}
+
 int main() 
 {
     int numbers[] = {5, 10, 15, 20, 25}; // Created on the stack
@@ -26,5 +35,8 @@ int main()
     // int* numbers = new int[5] {5, 10, 15, 20, 25};
 
     std::cout << "Sum: " << sumArray(numbers, 5) << std::endl; // Should print 75
+
+    incrementArray(numbers);
+    std::cout << "Incremented arr: " << numbers[0] << ", " << numbers[1];
     return 0;
 }
