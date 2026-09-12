@@ -37,6 +37,6 @@ int main()
     std::cout << "Sum: " << sumArray(numbers, 5) << std::endl; // Should print 75
 
     incrementArray(numbers);
-    std::cout << "Incremented arr: " << numbers[0] << ", " << numbers[1];
+    std::cout << "Incremented arr: " << numbers[0] << ", " << numbers[1] << std::endl;
     return 0;
 }
