@@ -18,7 +18,17 @@ void swapByReference(int& ref1, int& ref2)
     ref2 = temp;
 }
 
-// Bonus: Passing a pointer by reference
+void unableToSwapByValue(int ref1, int ref2)
+{
+    // This doesn't work because ref1 and ref2 are just copies of x and y.
+    // Swapping them does not affect x and y
+    int temp = ref1;
+    ref1 = ref2;
+    ref2 = temp;
+}
+
+// Bonus: Pass by Reference to Pointer
+// This implies that Pass-by-Pointer is creating a copy of the pointer 
 void swapByReferenceToPointer(int*& ptr1, int*& ptr2) 
 {
     if (ptr1 == nullptr || ptr2 == nullptr) return;
@@ -31,10 +41,13 @@ int main() {
     int x = 100, y = 500;
 
     swapByPointerValue(&x, &y);
-    std::cout << "After Pointer Swap -> x: " << x << ", y: " << y << std::endl; // 500, 100
+    std::cout << "After Swap by Pointer -> x: " << x << ", y: " << y << std::endl; // 500, 100
 
     swapByReference(x, y);
-    std::cout << "After Reference Swap -> x: " << x << ", y: " << y << std::endl; // 100, 500
+    std::cout << "After Swap by Reference -> x: " << x << ", y: " << y << std::endl; // 100, 500
+
+    unableToSwapByValue(x, y);
+    std::cout << "After Swap by Value -> x: " << x << ", y: " << y << std::endl; // 100, 500
 
     // Bonus
     int* ptrx = &x; int* ptry = &y;
