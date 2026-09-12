@@ -43,6 +43,11 @@ void printReverseValueByPtr(int* arrPtr, int size)
     std::cout << std::endl;
 }
 
+bool compare(int* arrPtr, int* arr2Ptr) 
+{
+    return arrPtr == arr2Ptr;
+}
+
 int main()
 {
     int numbers[] = {1, 2, 3, 4, 5};
@@ -54,6 +59,12 @@ int main()
     int size = sizeof(numbers) / sizeof(numbers[0]);
     printReverseValueByPtr(numbers, size);
     // Note that numbers is passed instead of &numbers due to array to pointer decay
+
+    // Comparing
+    int* numberPtrFromDecay = numbers; // No cast is needed if we want to get the pointer from an array
+    int* numberPtrFromFirstElem = &numbers[0];
+    bool same = compare(numberPtrFromDecay, numberPtrFromFirstElem);
+    std::cout << "numberPtrFromDecay and numberPtrFromFirstElem are the same: " << (same ? "YES" : "NO");
 }
 
 // Fun fact:
