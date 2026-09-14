@@ -5,7 +5,8 @@ int main() {
     float* float_ptr = new float; 
     
     // Check if allocation was successful (optional but good practice)
-    if (float_ptr == nullptr) {
+    if (float_ptr == nullptr) 
+    {
         std::cerr << "Memory allocation failed!" << std::endl;
         return 1;
     }
