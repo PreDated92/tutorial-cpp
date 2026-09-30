@@ -25,3 +25,10 @@ int main() {
 
     return 0;
 }
+
+// For Dynamic pointers, the new keyword bypasses normal scoped memory and allocates space on the heap (dynamic memory). 
+// The pointer p lives on the stack, but it points to a completely separate address on the heap. 
+// This memory lives forever until you explicitly tell it to die. It owns the resource. 
+// If the function ends and p goes out of scope, the heap memory remains allocated, causing a memory leak. 
+// You must manually call delete p; to free it. 
+// The object stays valid until you delete it. The danger is forgetting to delete it, or deleting it twice.
