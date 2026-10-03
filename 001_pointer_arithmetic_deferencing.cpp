@@ -22,10 +22,12 @@ int sumArray(int* arr, int size)
 // Changing Value via Pointer and Double Pointer
 void incrementArray(int* arr)
 {
-    *arr += 1;
-    arr++;
-    int** ptr = &arr;
-    **ptr += 2;
+    *arr += 1; // Dereferences the value of numbers[0] and increases it by 1.
+    arr++; // Moves the pointer to numbers[1]
+
+    int** ptr = &arr; // Ptr is now the address of arr which constains the address of numbers[1]
+    **ptr += 2; // The first dereference gives arr and the second derefernece gives the value of numbers[1], 
+    // which is then incremented by 2
 }
 
 int main() 
@@ -37,6 +39,6 @@ int main()
     std::cout << "Sum: " << sumArray(numbers, 5) << std::endl; // Should print 75
 
     incrementArray(numbers);
-    std::cout << "Incremented arr: " << numbers[0] << ", " << numbers[1] << std::endl;
+    std::cout << "Incremented arr: " << numbers[0] << ", " << numbers[1] << std::endl; // 6 and 12
     return 0;
 }
